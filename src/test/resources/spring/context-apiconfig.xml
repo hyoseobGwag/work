@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<!-- spring autowired option -->
+	<context:component-scan base-package="com.bizentro.unimes" />
+
+	<!-- aspect start -->
+
+	<!-- Exception Handling aspect Definition -->
+	<bean id="exceptionTransfer" class="com.bizentro.unimes.tracking.common.aspect.ExceptionTransferAspect" />
+
+	<!-- Logging aspect Definition -->
+	<bean id="moduleLoggingAspect" class="com.bizentro.unimes.tracking.common.aspect.ModuleLoggingAspect" />
+
+	<aop:config>
+
+		<!-- actionMethod point cut -->
+		<aop:pointcut id="actionMethod" expression="execution(* com.bizentro.unimes.tracking.service..execute(..))" />
+
+		<!-- Exception aspect (throwing name : ex) -->
+		<aop:aspect ref="exceptionTransfer">
+			<aop:after-throwing throwing="ex" method="transfer" pointcut-ref="actionMethod" />
+		</aop:aspect>
+
+		<!-- Logging aspect -->
+		<aop:aspect ref="moduleLoggingAspect">
+			<aop:before method="moduleBeforeLogger" pointcut-ref="actionMethod" />
+			<aop:after method="moduleAfterLogger" pointcut-ref="actionMethod" />
+		</aop:aspect>
+
+	</aop:config>
+
+	<!-- aspect end -->
+
+	<!-- hibernate start -->
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingDirectoryLocations">
+			<value>classpath:hibernate</value>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+			<!--	<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop> -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.use_sql_comments">true</prop>
+				<prop key="hibernate.jdbc.batch_size">100</prop>
+				<!-- 웹로직에서만 사용 -->
+				<prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- hibernate end -->
+
+	<!-- messageSource start -->
+<!--  -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<!-- classpath* /** 안먹음 -->
+				<value>messages/message-common</value>
+				<value>messages/message-tracking-production</value>
+				<value>messages/message-tracking-quality</value>
+				<value>messages/message-rule</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- messageSource end -->
+
+	<!-- api schema path start -->
+
+	<bean id="xmlSchema" class="com.bizentro.unimes.tracking.common.xml.XmlSchema">
+		<property name="xmlFiles">
+			<list>
+				<value>classpath:apischema</value>
+				<!-- 
+				<value>classpath:/apischema</value>
+				<value>classpath:code_schema.xml</value>
+				<value>classpath:/code_schema.xml</value>
+				 -->
+			</list>
+		</property>
+	</bean>	
+
+	<!-- api schema path end -->
+
+</beans>

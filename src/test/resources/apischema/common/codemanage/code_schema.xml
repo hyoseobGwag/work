@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Schema name="Schema">
+	<CreateCode name="CreateCode" type="header" class="com.bizentro.unimes.common.message.MessageSet">
+		<property name="updateTime" valueType="Date">current</property>
+		<property name="updateUser" mandatory="true" />
+		<property name="histFlag" valueType="Boolean">true</property>
+		<list name="list" type="header" class="com.bizentro.unimes.common.model.common.code.Code">
+			<property name="site" mandatory="true" />
+			<property name="name" mandatory="true" />
+			<property name="isUsable">InActive</property>
+		</list>
+	</CreateCode>
+	
+	<ModifyCode name="ModifyCode" type="header" class="com.bizentro.unimes.common.message.MessageSet">
+		<property name="updateTime" valueType="Date">current</property>
+		<property name="updateUser" mandatory="true" />
+		<property name="histFlag" valueType="Boolean">true</property>
+		<list name="list" type="header" class="com.bizentro.unimes.common.model.common.code.Code">
+			<property name="site" mandatory="true" />
+			<property name="name" mandatory="true" />
+		</list>
+	</ModifyCode>	
+</Schema>

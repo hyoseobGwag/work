@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+
+<!-- Project Name -->
+<project default="all" basedir=".">
+
+<echo message="pulling in property files"/>
+	
+	<!-- set actual directory -->
+	<property file="build.properties"/>
+
+	<!-- property library -->
+	<property name="lib_common" value="${LIBRARY_DIR}/lib_common"/>
+	<property name="lib_spring" value="${LIBRARY_DIR}/lib_spring"/>
+	<property name="lib_hibernate" value="${LIBRARY_DIR}/lib_hibernate"/>
+	<property name="lib_adaptor" value="${LIBRARY_DIR}/lib_adaptor"/>		
+	
+	<property name="user_library" value="${LIBRARY_DIR}/user_library"/>
+	
+	<property name="web" value="${WEB_DIR}/lib"/>
+	
+	<!-- classpath define -->
+	<path id="compile.classpath">
+		<fileset dir="${lib_common}">
+			<include name="**/*.jar"/>
+		</fileset>
+		
+		<fileset dir="${lib_spring}">
+			<include name="**/*.jar"/>
+		</fileset>
+		
+		<fileset dir="${lib_hibernate}">
+			<include name="**/*.jar"/>
+		</fileset>
+		
+		<fileset dir="${lib_adaptor}">
+			<include name="**/*.jar"/>
+		</fileset>
+		
+		<fileset dir="${user_library}">
+			<include name="**/*.jar"/>
+		</fileset>
+		
+		<!-- define build compile path -->
+		<pathelement location="${basedir}/../target/classes"/>
+	</path>
+	
+	<!-- initialize output folder (clear) -->
+	<target name="init">
+		<!-- class folder -->
+		<delete dir="${basedir}/../target/classes"/>
+		<mkdir dir="${basedir}/../target/classes"/>
+	</target>
+	
+	<!-- compile -->
+	<target name="compile">
+		<!-- compile main -->
+		<javac encoding="UTF-8" debug="true" srcdir="${basedir}/../src/main/java" destdir="${basedir}/../target/classes" fork="yes" memoryMaximumSize="256m" includeantruntime = "false">
+			<classpath>
+				<path refid="compile.classpath"/>
+			</classpath>
+			<compilerarg value="-Xlint:unchecked" />
+		</javac>
+		
+		<!-- for remain testcase outputfolder -->
+		<!-- compile test -->
+		<javac encoding="UTF-8" debug="true" srcdir="${basedir}/../src/test/java" destdir="${basedir}/../target/classes" fork="yes" memoryMaximumSize="256m" includeantruntime = "false">
+			<classpath>
+				<path refid="compile.classpath"/>
+			</classpath>
+		</javac>
+		
+		<!-- copy resource (main, test) -->
+		<copy todir="${basedir}/../target/classes" overwrite="true">
+			<fileset dir="${basedir}/../src/main/resources" />
+			<fileset dir="${basedir}/../src/test/resources" />
+			
+			<fileset dir="${COMMON_DIR}/src/main/resources/hibernate" />
+		</copy>
+	</target>
+
+	<!-- packaging(*.jar) class to library folder -->
+	<target name="package">
+
+		<!-- for lib_unimes -->
+		<!--
+		<delete file="${user_library}/lib_tracking-0.0.1.jar"/>
+		-->
+		<jar jarfile="${user_library}/lib_tracking-0.0.1.jar">
+			<fileset dir="${basedir}/../target/classes">
+				<!-- only class file -->
+				<include name="**/*.class"/>
+				<!-- exclude all testcase class -->
+				<exclude name="**/testcase/"/>
+			</fileset>
+		</jar>
+	</target>
+
+	<!-- copy resources to library folder -->
+	<target name="copy_resources">
+
+		<!-- delete exist common resources (apischema, message-tracking, quality, spring) -->		
+		<delete dir="${user_library}/resources/apischema"/>
+
+		<delete>
+			<fileset dir="${user_library}/resources/messages">
+				<include name="**/message-tracking*.*"/>
+				<include name="**/message-quality*.*"/>
+			</fileset>
+		</delete>
+
+		<delete file="${user_library}/resources/spring/context-apischema.xml"/>
+
+		<copy todir="${user_library}/resources" overwrite="true">
+			<fileset dir="${basedir}/../src/main/resources">
+				<exclude name="**/.svn/*.*"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${user_library}/resources" overwrite="true">
+			<fileset dir="${basedir}/../src/test/resources">
+				<exclude name="**/.svn/*.*"/>
+			</fileset>
+		</copy>
+			
+	</target>
+	
+	<target name="all" depends="init, compile, package, copy_resources"/>
+  
+</project>
+

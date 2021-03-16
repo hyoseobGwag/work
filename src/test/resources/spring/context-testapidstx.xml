@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<!-- test api datasource start -->
+
+	<!-- for local developer env (for api test) -->
+	<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	<!--	<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" /> -->
+		<property name="url" value="jdbc:mysql://localhost:3306/unimes?useSSL=false" />
+	<!--	<property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=unimes" />-->
+		<property name="username" value="root" />
+		<property name="password" value="1234" />
+	<!--	<property name="defaultAutoCommit" value="false" />-->
+	<!--	<property name="maxActive" value="100" />-->
+	</bean>
+
+	<!-- test api datasource end -->
+
+	<!-- test api transaction start -->
+
+	<!-- for local developer env (for api test) -->
+	<!-- sessionFactory(Hibernate) -->
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Exception" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- for local developer env (for api test) pointcut in com.bizentro.unimes.tracking.service..*Impl.*(..)) -->
+	<aop:config>
+		<aop:pointcut id="requiredTx" expression="execution(* com.bizentro.unimes.tracking.service..*Impl.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx" />
+	</aop:config>
+
+	<!-- test api transaction end -->
+
+</beans>

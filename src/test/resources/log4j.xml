@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d\t[%t]\t[%p]\t[%c]\t%m%n" />
+		</layout>
+	</appender>
+
+	<!-- for api performance DailyRollingFileAppender -->
+	<appender name="uniMesLog4Performance" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="../applog/unimes_performance.log" />
+		<param name="DatePattern" value=".yyyy-MM-dd-HH" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d\t[%t]\t[%p]\t[%c]\t%m%n" />
+		</layout>
+	</appender>
+
+	<!-- for api debug DailyRollingFileAppender -->
+	<appender name="uniMesLog4Debug" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="../applog/unimes_tracing.log" />
+		<param name="DatePattern" value=".yyyy-MM-dd-HH" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d\t[%t]\t[%p]\t[%c]\t%m%n" />
+		</layout>
+	</appender>
+
+	<!-- for rule tracing DailyRollingFileAppender -->
+	<appender name="ruletracing" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="../applog/rule_tracing.log" />
+		<param name="DatePattern" value=".yyyy-MM-dd-HH" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d\t[%t]\t[%p]\t[%c]\t%m%n" />
+		</layout>
+	</appender>
+
+	<!-- for rule messaging DailyRollingFileAppender -->
+	<appender name="rulemessaging" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="../applog/rule_message.log" />
+		<param name="DatePattern" value=".yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d\t[%t]\t[%p]\t[%c]\t%m%n" />
+		</layout>
+	</appender>
+
+	<!-- log all jdbc calls except ResultSet calls -->
+	<logger name="jdbc.audit" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="console" />
+		<appender-ref ref="uniMesLog4Debug" />
+	</logger>
+
+	<!-- log SQL (pre-execution) plus exceptions caused by SQL -->
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="console" />
+		<appender-ref ref="uniMesLog4Debug" />
+	</logger>
+
+	<!-- log SQL with timing information, post execution -->
+	<logger name="jdbc.sqltiming" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="console" />
+		<appender-ref ref="uniMesLog4Debug" />
+	</logger>
+
+	<!-- log the jdbc ResultSet calls -->
+	<logger name="jdbc.resultset" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="console" />
+		<appender-ref ref="uniMesLog4Debug" />
+	</logger>
+
+	<!-- UNIMES Performance Logging -->
+	<logger name="UNIMES_LOG_INFO" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="console" />
+		<appender-ref ref="uniMesLog4Performance" />
+	</logger>
+
+	<!-- UNIMES Debug Logging -->
+	<logger name="UNIMES_LOG_DEBUG" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+		<appender-ref ref="uniMesLog4Debug" />
+	</logger>
+
+	<!-- Exception Logging -->
+	<logger name="UNIMES_LOG_ERROR" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="console" />
+		<appender-ref ref="uniMesLog4Debug" />
+	</logger>
+
+	<!-- rule tracing Logging -->
+	<logger name="RULE_TRACING" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+		<appender-ref ref="ruletracing" />
+	</logger>
+
+	<!-- rule messaging Logging -->
+	<logger name="RULE_MSGING" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rulemessaging" />
+		<appender-ref ref="ruletracing" />
+	</logger>
+
+	<!-- rule messaging Logging -->
+	<logger name="RULE_DEBUG" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+	</logger>
+
+	<!-- WEB DEBUG -->
+	<logger name="UNIMES_WEB_DEBUG" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="console" />
+	</logger>
+
+	<!-- Default Logger -->
+	<root>
+		<level value="ERROR" />
+		<appender-ref ref="console" />
+		<appender-ref ref="uniMesLog4Debug" />
+	</root>
+	
+</log4j:configuration>

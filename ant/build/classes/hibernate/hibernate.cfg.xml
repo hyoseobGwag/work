@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="sessionFactory">
+       <!--   <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property> -->
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">1234</property>
+        <!-- <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=unimes</property> -->
+  		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/unimes?useSSL=false</property>
+        
+        
+         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+               
+     <!--   <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>       --> 
+        
+        
+    	<!-- Echo all executed SQL to stdout -->
+    	<property name="show_sql">true</property>
+         
+    	<!-- Automatic schema creation (begin) === -->
+    	<!-- 
+    	<property name="hibernate.hbm2ddl.auto">create</property>
+    	 -->
+    	 <property name="hbm2ddl.auto">update </property>
+    	 <mapping resource="Code.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

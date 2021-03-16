@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping default-lazy="true">
+
+	<class name="com.bizentro.unimes.common.model.common.code.Code" table="UMCODE">
+
+		<!-- 테이블 컬럼 -->
+		<id name="id" column="CODEID" type="java.lang.String"> 
+			<generator class="assigned"/> 
+		</id>
+		<property name="name" column="CODENAME" type="java.lang.String"/>
+		<property name="CodeClassID" column="CODECLASSID" type="java.lang.String"/>
+		<property name="DisplaySequence" column="DISPLAYSEQUENCE" type="java.lang.Integer"/>
+		
+		<!-- 기본 컬럼 -->
+		<property name="site" column="SITE" type="java.lang.String"/>
+		
+		<!-- 콩통컬럼 -->
+		<property name="comments" column="COMMENTS" type="java.lang.String"/>
+		<property name="executeService" column="EXECUTESERVICE" type="java.lang.String"/>
+		<property name="originalExecuteService" column="ORIGINALEXECUTESERVICE" type="java.lang.String"/>		
+		<property name="actionCode" column="ACTIONCODE" type="java.lang.String"/>
+		<property name="isUsable" column="ISUSABLE" type="java.lang.String"/>
+		<property name="createUser" column="CREATEUSER" type="java.lang.String"/>
+		<property name="createTime" column="CREATETIME" type="java.util.Date"/>
+		<property name="updateUser" column="UPDATEUSER" type="java.lang.String"/>
+		<property name="updateTime" column="UPDATETIME" type="java.util.Date"/>
+		<property name="lastEventTime" column="LASTEVENTTIME" type="java.util.Date"/>
+	</class>
+
+</hibernate-mapping>
