@@ -1,0 +1,514 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.bizentro.unimes</groupId>
+  <artifactId>lib_tracking</artifactId>
+  <version>0.0.1</version>
+  <packaging>jar</packaging>
+
+  <name>tracking</name>
+  <url>http://maven.apache.org</url>
+
+  <repositories>
+    <repository>
+          <id>local-repository</id> 
+          <name>local repository</name> 
+          <url>file://${lib.dir}</url> 
+    </repository>
+</repositories>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <!-- Build Properties -->
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    
+    <!--  자유롭게 기술 가능 -->
+    
+   	<!-- define : Library dir -->
+   	<LIBRARY_DIR>c:/MES/workspace</LIBRARY_DIR>
+
+   	<!-- property define -->    	
+       <property name="lib_adaptor" value="${LIBRARY_DIR}/mes_library/lib_adaptor" />
+       <property name="lib_common" value="${LIBRARY_DIR}/mes_library/lib_common" />
+       <property name="lib_hibernate" value="${LIBRARY_DIR}/mes_library/lib_hibernate" />
+       <property name="lib_spring" value="${LIBRARY_DIR}/mes_library/lib_spring" />
+       <!-- 
+       <property name="unimes_common" value="${LIBRARY_DIR}/mes_common/common/target" />
+        -->
+  </properties>
+
+
+	<!-- 필수내용 : 프로젝트에 Import 되는 dependency 목록 -->
+  <dependencies>  
+
+    <!-- https://mvnrepository.com/artifact/junit/junit -->
+    <dependency>
+    <groupId>jdbc3</groupId>
+    <artifactId>log4jdbc3</artifactId>
+    <version>1.2alpha2</version>
+    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/log4jdbc3-1.2alpha2.jar</systemPath> 
+	</dependency>
+	 
+	<!-- jms Adaptor 설정 -->
+	<dependency>
+		<groupId>javax.jms</groupId>
+		<artifactId>javax.jms-api</artifactId>
+		<version>2.0</version>
+		<scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/javax.jms-api-2.0.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
+	<dependency>
+	    <groupId>javax.inject</groupId>
+	    <artifactId>javax.inject</artifactId>
+	    <version>1</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/javax.jms-api-2.0.jar</systemPath>
+	</dependency>
+	
+		
+	<!-- spring 설정 -->
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-asm -->
+	<!-- 
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-asm</artifactId>
+	    <version>2.5.6</version>
+	</dependency>
+	 -->
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-aop</artifactId>
+	    <version>2.5.6</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-aop-2.5.6.jar</systemPath>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-beans</artifactId>
+	    <version>2.5.6</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-beans-2.5.6.jar</systemPath>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>2.5.6</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-context-2.5.6.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context-support</artifactId>
+	    <version>2.5.6</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-context-support-2.5.6.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-core</artifactId>
+	    <version>2.5.6</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-core-2.5.6.jar</systemPath>
+	</dependency>	
+
+	<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
+	<dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-commons</artifactId>
+	    <version>1.12.6.RELEASE</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-data-commons-1.12.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-expression -->
+	<!-- 
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-expression</artifactId>
+	    <version>2.5.6</version>
+	</dependency>
+	 -->	
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>2.5.6</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-jdbc-2.5.6.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jms -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jms</artifactId>
+	    <version>2.5.6</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-jms-2.5.6.jar</systemPath>
+	</dependency>	
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-orm</artifactId>
+	    <version>2.5.6</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-orm-2.5.6.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-test</artifactId>
+	    <version>2.5.6</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-test-2.5.6.jar</systemPath>
+	</dependency>	
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-tx</artifactId>
+	    <version>2.5.6</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-tx-2.5.6.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-web</artifactId>
+	    <version>2.5.6</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/spring-web-2.5.6.jar</systemPath>
+	</dependency>
+	
+	<!-- Spring End -->
+	
+	<!-- Common Library -->
+	
+	<!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
+	<dependency>
+	    <groupId>aopalliance</groupId>
+	    <artifactId>aopalliance</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/aopalliance-1.0.jar</systemPath>
+	</dependency>
+
+	
+	<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>1.8.10</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/aspectjweaver-1.8.10.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+		<groupId>avalon-framework</groupId>
+		<artifactId>avalon-framework</artifactId>
+		<version>4.0</version>
+		<scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/avalon-framework-4.0.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/cglib/cglib-nodep -->
+	<dependency>
+	    <groupId>cglib</groupId>
+	    <artifactId>cglib-nodep</artifactId>
+	    <version>2.2.2</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/cglib-nodep-2.2.2.jar</systemPath>
+	</dependency>
+
+	
+	<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+	<dependency>
+		<groupId>commons-beanutils</groupId>
+		<artifactId>commons-beanutils</artifactId>
+		<version>1.8.0</version>
+		<scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/commons-beanutils-1.8.0.jar</systemPath>
+	</dependency>
+
+	
+	<!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
+	<dependency>
+	    <groupId>commons-collections</groupId>
+	    <artifactId>commons-collections</artifactId>
+	    <version>3.2.2</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/commons-collections-3.2.2.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+	<dependency>
+	    <groupId>commons-dbcp</groupId>
+	    <artifactId>commons-dbcp</artifactId>
+	    <version>1.2.2</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/commons-dbcp-1.2.2.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+	<dependency>
+	    <groupId>commons-logging</groupId>
+	    <artifactId>commons-logging</artifactId>
+	    <version>1.2</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/commons-logging-1.2.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>commons-pool</groupId>
+	    <artifactId>commons-pool</artifactId>
+	    <version>1.5.2</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/commons-pool-1.5.2.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
+	<dependency>
+	    <groupId>javax.annotation</groupId>
+	    <artifactId>javax.annotation-api</artifactId>
+	    <version>1.3.2</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/javax.annotation-api-1.3.2.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>jta</groupId>
+	    <artifactId>jta</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/jta.jar</systemPath>
+	</dependency>	
+
+	<!-- https://mvnrepository.com/artifact/javassist/javassist -->
+	<dependency>
+	    <groupId>javassist</groupId>
+	    <artifactId>javassist</artifactId>
+	    <version>3.10.0.GA</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/javassist-3.10.0.GA.jar</systemPath>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+	<dependency>
+	    <groupId>com.mchange</groupId>
+	    <artifactId>c3p0</artifactId>
+	    <version>0.9.5.5</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/c3p0-0.9.5.5.jar</systemPath>
+	</dependency>	
+	
+	<!-- https://mvnrepository.com/artifact/com.mchange/mchange-commons-java -->
+	<dependency>
+	    <groupId>com.mchange</groupId>
+	    <artifactId>mchange-commons-java</artifactId>
+	    <version>0.2.11</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/mchange-commons-java-0.2.11.jar</systemPath>
+	</dependency>
+	
+
+	<!-- https://mvnrepository.com/artifact/org.slf4j/jcl-over-slf4j 
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>jcl-over-slf4j</artifactId>
+		<version>1.7.5</version>
+		<scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/jcl-over-slf4j-1.7.5.jar</systemPath>
+	</dependency>-->
+
+	<!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
+	<dependency>
+		<groupId>dom4j</groupId>
+		<artifactId>dom4j</artifactId>
+		<version>1.6.1</version>
+		<scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/dom4j-1.6.1.jar</systemPath>
+	</dependency>
+	
+    <!-- jdom 설정 -->
+	<!-- https://mvnrepository.com/artifact/org.jdom/jdom -->
+	<dependency>
+	    <groupId>org.jdom</groupId>
+	    <artifactId>jdom</artifactId>
+	    <version>1.1.3</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/jdom-1.1.3.jar</systemPath>
+	</dependency>
+
+   <!-- log4j start -->
+	<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+	<dependency>
+	    <groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+	    <version>1.3alpha-8</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/log4j-1.3alpha-8.jar</systemPath>
+	</dependency>
+
+	
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>5.1.47</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/mysql-connector-java-5.1.47.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+    <groupId>com.microsoft.sqlserver</groupId>
+    <artifactId>mssql-jdbc</artifactId>
+    <version>6.4.0.jre7</version>
+    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/mssql-jdbc-6.4.0.jre7.jar</systemPath>
+	</dependency>
+   
+	<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api 
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	    <version>1.7.5</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/slf4j-api-1.7.5.jar</systemPath>
+	</dependency>-->
+	
+	<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-log4j12</artifactId>
+	    <version>1.7.5</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/slf4j-log4j12-1.7.5.jar</systemPath>
+	</dependency>-->
+
+	
+	<!-- lib_common -->
+	
+	<!-- Hibernate Library -->
+	
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+	<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.1.14.Final</version>
+		<scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/hibernate-core-5.1.14.Final.jar</systemPath>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate -->
+	
+	<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-ehcache</artifactId>
+    <version>5.1.14.Final</version>
+	    <scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/hibernate-ehcache-5.1.14.Final.jar</systemPath>
+	</dependency>
+	
+	<!-- User Library -->
+	
+	<dependency>
+		<groupId>unimes_common</groupId>
+		<artifactId>unimes_common</artifactId>
+		<version>0.0.1</version>
+		<scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/lib_common-0.0.1.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+		<groupId>lib_tracking</groupId>
+		<artifactId>lib_tracking</artifactId>
+		<version>0.0.1</version>
+		<scope>system</scope> 
+	<systemPath>${project.basedir}/src/main/resources/lib/lib_tracking-0.0.1.jar</systemPath>
+	</dependency>
+  </dependencies>
+  
+  
+	<!-- 필수내용 : 프로젝트 Build 정보 -->  
+	<build>
+		<!--  선택사항 : resource 정보 기재 -->
+		<!-- 
+		<resources>
+			<directory>src/main/resources</directory>
+		</resources>
+		 -->
+		
+		<!--  선택사항 : maven 관련 plugin 정보 기재 -->
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+          <!-- 무시하도록
+          <configuration> 
+            <compilerArgs>
+              <arg>-Xlint</arg>
+            </compilerArgs>
+          </configuration>
+            -->
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+		
+	</build>
+	<description>UNIMES Tracking Library</description>
+</project>
